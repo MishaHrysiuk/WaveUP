@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveUP.WebUI", "WaveUP.WebUI\WaveUP.WebUI.csproj", "{D13E0FF2-D04B-4940-B7FE-A0FC86970F41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DF49487-350E-4F68-AAB1-9ADDC2B18DD5} = {0DF49487-350E-4F68-AAB1-9ADDC2B18DD5}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveUP.UnitTests", "WaveUP.UnitTests\WaveUP.UnitTests.csproj", "{731F49E5-F914-4533-B274-86D14BCA9653}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaveUP.UnitTests", "WaveUP.UnitTests\WaveUP.UnitTests.csproj", "{731F49E5-F914-4533-B274-86D14BCA9653}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DF49487-350E-4F68-AAB1-9ADDC2B18DD5} = {0DF49487-350E-4F68-AAB1-9ADDC2B18DD5}
+		{D13E0FF2-D04B-4940-B7FE-A0FC86970F41} = {D13E0FF2-D04B-4940-B7FE-A0FC86970F41}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveUP.Domain", "WaveUP.Domain\WaveUP.Domain.csproj", "{0DF49487-350E-4F68-AAB1-9ADDC2B18DD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaveUP.Domain", "WaveUP.Domain\WaveUP.Domain.csproj", "{0DF49487-350E-4F68-AAB1-9ADDC2B18DD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
