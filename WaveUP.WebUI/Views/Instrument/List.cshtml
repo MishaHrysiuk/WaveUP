@@ -1,0 +1,16 @@
+﻿@using WaveUP.Domain.Entities
+@model IEnumerable<Instrument>
+
+@{
+    ViewBag.Title = "Товары";
+}
+
+@foreach (var p in @Model)
+{
+    <div>
+        <h3>@p.Name</h3>
+        <p>@p.Description</p>
+        <h4>@p.Price.ToString("# $")</h4>
+    </div>
+}
+

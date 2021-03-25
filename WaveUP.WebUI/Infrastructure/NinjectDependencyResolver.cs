@@ -32,7 +32,7 @@ namespace WaveUP.WebUI.Infrastructure
         private void AddBindings()
         {
             // Здесь размещаются привязки
-            Mock<IInstrumenteRepository> mock = new Mock<IInstrumentRepository>();
+            Mock<IInstrumentRepository> mock = new Mock<IInstrumentRepository>();
             mock.Setup(m => m.Instruments).Returns(new List<Instrument>
             {
                 new Instrument { Name = "Guitar", Price = 1000 },

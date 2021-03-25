@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WaveUP.Domain.Abstract
 {
-    interface IGameRepository
+    public interface IInstrumentRepository
     {
         IEnumerable<Instrument> Instruments { get; }
     }
