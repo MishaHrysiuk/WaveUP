@@ -4,8 +4,13 @@
     ViewBag.Title = "WaveUP: ваша корзина";
 }
 
+<style>
+    #cartTable td {
+        vertical-align: middle;
+    }
+</style>
 <h2>Ваша корзина</h2>
-<table class="table">
+<table id="cartTable" class="table">
     <thead>
         <tr>
             <th>Кількість</th>
@@ -23,6 +28,14 @@
                 <td class="text-right">@line.Instrument.Price.ToString("# $")</td>
                 <td class="text-right">
                     @((line.Quantity * line.Instrument.Price).ToString("# $"))
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("InstrumentId", line.Instrument.InstrumentId)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="btn btn-sm btn-warning" type="submit" value="Видалити" />
+                    }
                 </td>
             </tr>
         }

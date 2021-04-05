@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using WaveUP.Domain.Entities;
+using WaveUP.WebUI.Infrastructure.Binders;
 
 namespace WaveUP.WebUI
 {
@@ -13,6 +15,7 @@ namespace WaveUP.WebUI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }

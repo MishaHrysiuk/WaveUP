@@ -12,54 +12,47 @@ namespace WaveUP.WebUI.Controllers
 {
     public class CartController : Controller
     {
-        public ViewResult Index(string returnUrl)
-        {
-            return View(new CartIndexViewModel
-            {
-                Cart = GetCart(),
-                ReturnUrl = returnUrl
-            });
-        }
-
         private IInstrumentRepository repository;
         public CartController(IInstrumentRepository repo)
         {
             repository = repo;
         }
-
-        public RedirectToRouteResult AddToCart(int instrumentId, string returnUrl)
+        public ViewResult Index(Cart cart, string returnUrl)
+        {
+            return View(new CartIndexViewModel
+            {
+                Cart = cart,
+                ReturnUrl = returnUrl
+            });
+        }
+        
+        public RedirectToRouteResult AddToCart(Cart cart, int instrumentId, string returnUrl)
         {
             Instrument instrument = repository.Instruments
                 .FirstOrDefault(g => g.InstrumentId == instrumentId);
 
             if (instrument != null)
             {
-                GetCart().AddItem(instrument, 1);
+                cart.AddItem(instrument, 1);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public RedirectToRouteResult RemoveFromCart(int instrumentId, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int instrumentId, string returnUrl)
         {
             Instrument instrument = repository.Instruments
                 .FirstOrDefault(g => g.InstrumentId == instrumentId);
 
             if (instrument != null)
             {
-                GetCart().RemoveLine(instrument);
+                cart.RemoveLine(instrument);
             }
             return RedirectToAction("Index", new { returnUrl });
+            
         }
-
-        public Cart GetCart()
+        public PartialViewResult Summary(Cart cart)
         {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-            return cart;
+            return PartialView(cart);
         }
     }
 }
