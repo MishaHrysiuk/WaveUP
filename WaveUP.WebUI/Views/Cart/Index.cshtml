@@ -1,0 +1,42 @@
+﻿@model WaveUP.WebUI.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "WaveUP: ваша корзина";
+}
+
+<h2>Ваша корзина</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Кількість</th>
+            <th>Інструмент</th>
+            <th class="text-right">Ціна</th>
+            <th class="text-right">Загальна ціна</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Instrument.Name</td>
+                <td class="text-right">@line.Instrument.Price.ToString("# $")</td>
+                <td class="text-right">
+                    @((line.Quantity * line.Instrument.Price).ToString("# $"))
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Разом:</td>
+            <td class="text-right">
+                @Model.Cart.ComputeTotalValue().ToString("# $")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Продовжити покупки</a>
+</div>
