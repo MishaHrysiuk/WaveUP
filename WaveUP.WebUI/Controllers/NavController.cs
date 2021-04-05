@@ -15,7 +15,7 @@ namespace WaveUP.WebUI.Controllers
         {
             repository = repo;
         }
-        public PartialViewResult Menu()
+        public PartialViewResult Menu(string category = null)
         {
             IEnumerable<string> categories = repository.Instruments
                 .Select(instrument => instrument.Category)

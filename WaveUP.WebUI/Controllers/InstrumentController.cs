@@ -30,7 +30,9 @@ namespace WaveUP.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = repository.Instruments.Count()
+                    TotalItems = category == null ?
+        repository.Instruments.Count() :
+        repository.Instruments.Where(instrument => instrument.Category == category).Count()
                 },
                 CurrentCategory = category
             };
