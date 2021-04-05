@@ -9,11 +9,11 @@
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">WaveUP - магазин музичних інструментів</a>
+        <a class="navbar-brand" href="#">GameStore - магазин компьютерных игр</a>
     </div>
     <div class="row panel">
         <div id="categories" class="col-xs-3">
-            Поки пусто
+            @Html.Action("Menu", "Nav")
         </div>
         <div class="col-xs-8">
             @RenderBody()

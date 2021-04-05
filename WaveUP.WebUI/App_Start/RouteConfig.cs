@@ -13,17 +13,36 @@ namespace WaveUP.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-               name: null,
-               url: "Page{page}",
-               defaults: new { controller = "Instrument", action = "List" }
-           );
+            routes.MapRoute(null,
+                "",
+                new
+                {
+                    controller = "Instrument",
+                    action = "List",
+                    category = (string)null,
+                    page = 1
+                }
+            );
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Instrument", action = "List", id = UrlParameter.Optional }
+                name: null,
+                url: "Page{page}",
+                defaults: new { controller = "Instrument", action = "List", category = (string)null },
+                constraints: new { page = @"\d+" }
             );
+
+            routes.MapRoute(null,
+                "{category}",
+                new { controller = "Instrument", action = "List", page = 1 }
+            );
+
+            routes.MapRoute(null,
+                "{category}/Page{page}",
+                new { controller = "Instrument", action = "List" },
+                new { page = @"\d+" }
+            );
+
+            routes.MapRoute(null, "{controller}/{action}");
         }
     }
 }

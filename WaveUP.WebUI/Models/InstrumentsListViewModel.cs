@@ -10,5 +10,6 @@ namespace WaveUP.WebUI.Models
     {
         public IEnumerable<Instrument> Instruments { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

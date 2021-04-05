@@ -17,12 +17,13 @@ namespace WaveUP.WebUI.Controllers
         {
             repository = repo;
         }
-        public ViewResult List(int page = 1)
+        public ViewResult List(string category, int page = 1)
         {
             InstrumentsListViewModel model = new InstrumentsListViewModel
             {
                 Instruments = repository.Instruments
-                    .OrderBy(game => game.InstrumentId)
+                    .Where(p => category == null || p.Category == category)
+                    .OrderBy(Instrument => Instrument.InstrumentId)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize),
                 PagingInfo = new PagingInfo
@@ -30,7 +31,8 @@ namespace WaveUP.WebUI.Controllers
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
                     TotalItems = repository.Instruments.Count()
-                }
+                },
+                CurrentCategory = category
             };
             return View(model);
         }
