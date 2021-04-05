@@ -32,16 +32,16 @@ namespace WaveUP.WebUI.Infrastructure
 
         private void AddBindings()
         {
-            // Здесь размещаются привязки
-            //Mock<IInstrumentRepository> mock = new Mock<IInstrumentRepository>();
-            //mock.Setup(m => m.Instruments).Returns(new List<Instrument>
-            //{
-            //    new Instrument { Name = "Guitar", Price = 1000 },
-            //    new Instrument { Name = "Violin", Price=1550 },
-            //    new Instrument { Name = "Piano", Price=10000 }
-            //});
-            //kernel.Bind<IInstrumentRepository>().ToConstant(mock.Object);
             kernel.Bind<IInstrumentRepository>().To<EFInstrumentRepository>();
+
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                    .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
         }
     }
 }
