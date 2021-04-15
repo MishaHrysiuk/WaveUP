@@ -9,14 +9,14 @@ namespace WaveUP.Domain.Concrete
     public class EmailSettings
     {
         public string MailToAddress = "orders@example.com";
-        public string MailFromAddress = "gamestore@example.com";
+        public string MailFromAddress = "waveup@example.com";
         public bool UseSsl = true;
         public string Username = "MySmtpUsername";
         public string Password = "MySmtpPassword";
         public string ServerName = "smtp.example.com";
         public int ServerPort = 587;
         public bool WriteAsFile = true;
-        public string FileLocation = @"c:\game_store_emails";
+        public string FileLocation = @"c:\waveup_emails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
@@ -48,9 +48,9 @@ namespace WaveUP.Domain.Concrete
                 }
 
                 StringBuilder body = new StringBuilder()
-                    .AppendLine("Новый заказ обработан")
+                    .AppendLine("Новий заказ опрацьований")
                     .AppendLine("---")
-                    .AppendLine("Товары:");
+                    .AppendLine("Товари:");
 
                 foreach (var line in cart.Lines)
                 {
@@ -59,7 +59,7 @@ namespace WaveUP.Domain.Concrete
                         line.Quantity, line.Instrument.Name, subtotal);
                 }
 
-                body.AppendFormat("Общая стоимость: {0:c}", cart.ComputeTotalValue())
+                body.AppendFormat("Загальна вартість: {0:c}", cart.ComputeTotalValue())
                     .AppendLine("---")
                     .AppendLine("Доставка:")
                     .AppendLine(shippingInfo.Name)
@@ -69,13 +69,13 @@ namespace WaveUP.Domain.Concrete
                     .AppendLine(shippingInfo.City)
                     .AppendLine(shippingInfo.Country)
                     .AppendLine("---")
-                    .AppendFormat("Подарочная упаковка: {0}",
+                    .AppendFormat("Подарункова упаковка: {0}",
                         shippingInfo.GiftWrap ? "Да" : "Нет");
 
                 MailMessage mailMessage = new MailMessage(
                                        emailSettings.MailFromAddress,	// От кого
                                        emailSettings.MailToAddress,		// Кому
-                                       "Новый заказ отправлен!",		// Тема
+                                       "Новий заказ відправлений!",		// Тема
                                        body.ToString()); 				// Тело письма
 
                 if (emailSettings.WriteAsFile)
