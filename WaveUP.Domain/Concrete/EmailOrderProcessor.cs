@@ -62,15 +62,14 @@ namespace WaveUP.Domain.Concrete
                 body.AppendFormat("Загальна вартість: {0:c}", cart.ComputeTotalValue())
                     .AppendLine("---")
                     .AppendLine("Доставка:")
-                    .AppendLine(shippingInfo.Name)
-                    .AppendLine(shippingInfo.Line1)
-                    .AppendLine(shippingInfo.Line2 ?? "")
-                    .AppendLine(shippingInfo.Line3 ?? "")
-                    .AppendLine(shippingInfo.City)
-                    .AppendLine(shippingInfo.Country)
-                    .AppendLine("---")
-                    .AppendFormat("Подарункова упаковка: {0}",
-                        shippingInfo.GiftWrap ? "Да" : "Нет");
+                    .AppendLine(shippingInfo.FirstName)
+                    .AppendLine(shippingInfo.LastName)
+                    .AppendLine(shippingInfo.Region)
+                    .AppendLine(shippingInfo.Town)
+                    .AppendLine(shippingInfo.Address)
+                    .AppendLine(shippingInfo.HouseNumber)
+                    .AppendLine(shippingInfo.ApartmentNumber ?? "")
+                    .AppendLine(shippingInfo.PhoneNumber);
 
                 MailMessage mailMessage = new MailMessage(
                                        emailSettings.MailFromAddress,	// От кого
