@@ -16,7 +16,7 @@ namespace WaveUP.Domain.Concrete
         public string ServerName = "smtp.example.com";
         public int ServerPort = 587;
         public bool WriteAsFile = true;
-        public string FileLocation = @"c:\waveup_emails";
+        public string FileLocation = @"D:\waveup_emails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
