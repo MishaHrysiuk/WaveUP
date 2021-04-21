@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace WaveUP.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         IInstrumentRepository repository;
