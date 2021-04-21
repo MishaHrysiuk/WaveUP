@@ -12,5 +12,23 @@ namespace WaveUP.Domain.Concrete
         {
             get { return context.Instruments; }
         }
+
+        public void SaveInstrument(Instrument instrument)
+        {
+            if (instrument.InstrumentId == 0)
+                context.Instruments.Add(instrument);
+            else
+            {
+                Instrument dbEntry = context.Instruments.Find(instrument.InstrumentId);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = instrument.Name;
+                    dbEntry.Description = instrument.Description;
+                    dbEntry.Price = instrument.Price;
+                    dbEntry.Category = instrument.Category;
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }
