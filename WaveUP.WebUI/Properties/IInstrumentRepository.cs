@@ -11,5 +11,6 @@ namespace WaveUP.Domain.Abstract
     {
         IEnumerable<Instrument> Instruments { get; }
         void SaveInstrument(Instrument instrument);
+        Instrument DeleteInstrument(int instrumentId);
     }
 }

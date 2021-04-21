@@ -30,5 +30,16 @@ namespace WaveUP.Domain.Concrete
             }
             context.SaveChanges();
         }
+
+        public Instrument DeleteInstrument(int instrumentId)
+        {
+            Instrument dbEntry = context.Instruments.Find(instrumentId);
+            if (dbEntry != null)
+            {
+                context.Instruments.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

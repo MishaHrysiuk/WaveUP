@@ -19,6 +19,11 @@ namespace WaveUP.WebUI.Controllers
             return View(repository.Instruments);
         }
 
+        public ViewResult Create()
+        {
+            return View("Edit", new Instrument());
+        }
+
         public ViewResult Edit(int instrumentId)
         {
             Instrument instrument = repository.Instruments
@@ -41,6 +46,18 @@ namespace WaveUP.WebUI.Controllers
                 // Что-то не так со значениями данных
                 return View(instrument);
             }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int instrumentId)
+        {
+            Instrument deletedInstrument = repository.DeleteInstrument(instrumentId);
+            if (deletedInstrument != null)
+            {
+                TempData["message"] = string.Format("Игра \"{0}\" была удалена",
+                    deletedInstrument.Name);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
