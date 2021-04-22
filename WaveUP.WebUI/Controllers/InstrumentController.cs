@@ -38,5 +38,20 @@ namespace WaveUP.WebUI.Controllers
             };
             return View(model);
         }
+
+        public FileContentResult GetImage(int instrumentId)
+        {
+            Instrument instrument = repository.Instruments
+                .FirstOrDefault(g => g.InstrumentId == instrumentId);
+
+            if (instrument != null)
+            {
+                return File(instrument.ImageData, instrument.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

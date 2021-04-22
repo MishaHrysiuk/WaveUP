@@ -5,8 +5,9 @@ using System.Web.Mvc;
 using Moq;
 using Ninject;
 using WaveUP.Domain.Abstract;
-using WaveUP.Domain.Entities;
 using WaveUP.Domain.Concrete;
+using WaveUP.WebUI.Infrastructure.Concrete;
+using WaveUP.WebUI.Infrastructure.Abstract;
 
 namespace WaveUP.WebUI.Infrastructure
 {
@@ -42,6 +43,8 @@ namespace WaveUP.WebUI.Infrastructure
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
+            
+            kernel.Bind<IAuthProvider>().To<FormAuthProvider>();
         }
     }
 }

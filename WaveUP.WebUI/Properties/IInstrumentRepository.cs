@@ -10,5 +10,7 @@ namespace WaveUP.Domain.Abstract
     public interface IInstrumentRepository
     {
         IEnumerable<Instrument> Instruments { get; }
+        void SaveInstrument(Instrument instrument);
+        Instrument DeleteInstrument(int instrumentId);
     }
 }

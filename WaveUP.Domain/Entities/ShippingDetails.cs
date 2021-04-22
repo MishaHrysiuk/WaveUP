@@ -9,25 +9,43 @@ namespace WaveUP.Domain.Entities
 {
     public class ShippingDetails
     {
-        [Required(ErrorMessage = "Вкажіть ваше імя")]
-        public string Name { get; set; }
+        //First Name
+        [Required(ErrorMessage = "Вкажіть ім'я")]
+        [Display(Name = "Ім'я")]
+        public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Вкажіть перший адрес доставки")]
-        [Display(Name = "Перший адрес")]
-        public string Line1 { get; set; }
-        [Display(Name = "Другий адрес")]
-        public string Line2 { get; set; }
-        [Display(Name = "Третій адрес")]
-        public string Line3 { get; set; }
+        //Last Name
+        [Required(ErrorMessage = "Вкажіть прізвище")]
+        [Display(Name = "Прізвище")]
+        public string LastName { get; set; }
+        
+        // Region
+        [Required(ErrorMessage = "Вкажіть область")]
+        [Display(Name = "Область")]
+        public string Region { get; set; }
 
-        [Required(ErrorMessage = "Вкажіть місто")]
-        [Display(Name = "Місто")]
-        public string City { get; set; }
+        //Town
+        [Required(ErrorMessage = "Вкажіть населенний пункт")]
+        [Display(Name = "Населенний пункт")]
+        public string Town { get; set; }
 
-        [Required(ErrorMessage = "Вкажіть країну")]
-        [Display(Name = "Країна")]
-        public string Country { get; set; }
+        //Address
+        [Required(ErrorMessage = "Вкажіть адресу")]
+        [Display(Name = "Адреса")]
+        public string Address { get; set; }
 
-        public bool GiftWrap { get; set; }
+        //House number
+        [Required(ErrorMessage = "Вкажіть номер будинку")]
+        [Display(Name = "Номер будинку")]
+        public string HouseNumber { get; set; }
+
+        //Apartment number 
+        [Display(Name = "Номер квартири")]
+        public string ApartmentNumber { get; set; }
+
+        //Phone тumber 
+        [Required(ErrorMessage = "Вкажіть номер телефону")]
+        [Display(Name = "Номер телефону")]
+        public string PhoneNumber { get; set; }
     }
 }
