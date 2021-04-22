@@ -2,6 +2,7 @@
 using WaveUP.Domain.Abstract;
 using WaveUP.Domain.Entities;
 using System.Linq;
+using System.Web;
 
 namespace WaveUP.WebUI.Controllers
 {
@@ -34,12 +35,18 @@ namespace WaveUP.WebUI.Controllers
 
         // Перегруженная версия Edit() для сохранения изменений
         [HttpPost]
-        public ActionResult Edit(Instrument instrument)
+        public ActionResult Edit(Instrument instrument, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    instrument.ImageMimeType = image.ContentType;
+                    instrument.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(instrument.ImageData, 0, image.ContentLength);
+                }
                 repository.SaveInstrument(instrument);
-                TempData["message"] = string.Format("Изменения в игре \"{0}\" были сохранены", instrument.Name);
+                TempData["message"] = string.Format("Зміна товару \"{0}\" були збережені", instrument.Name);
                 return RedirectToAction("Index");
             }
             else

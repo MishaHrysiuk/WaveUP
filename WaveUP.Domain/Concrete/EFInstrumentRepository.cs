@@ -26,6 +26,8 @@ namespace WaveUP.Domain.Concrete
                     dbEntry.Description = instrument.Description;
                     dbEntry.Price = instrument.Price;
                     dbEntry.Category = instrument.Category;
+                    dbEntry.ImageData = instrument.ImageData;
+                    dbEntry.ImageMimeType = instrument.ImageMimeType;
                 }
             }
             context.SaveChanges();
