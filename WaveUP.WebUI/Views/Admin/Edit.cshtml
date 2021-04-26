@@ -9,7 +9,7 @@
 
 <div class="panel">
     <div class="panel-heading">
-        <h3>Редактирование игры «@Model.Name»</h3>
+        <h3>Редагування товару «@Model.Name»</h3>
     </div>
 
     @using (Html.BeginForm("Edit", "Admin",
@@ -46,9 +46,9 @@
             }
             <div class="form-group">
                 <div style="position:relative;">
-                    <label>Картинка</label>
-                    <a class='btn' href='javascript:;'>
-                        Выберите файл...
+                    <label>Зображення</label>
+                    <a class='btn btn-info' href='javascript:;'>
+                        Виберіть файл...
                         <input type="file" name="Image" size="40"
                                style="position:absolute;z-index:2;top:0;
                                 left:0;filter: alpha(opacity=0); opacity:0;
@@ -59,7 +59,7 @@
                 </div>
                 @if (Model.ImageData == null)
                 {
-                    <div class="form-control-static">Нет картинки</div>
+                    <div class="form-control-static">Нема зображення</div>
                 }
                 else
                 {
@@ -70,11 +70,11 @@
             </div>
         </div>
         <div class="panel-footer">
-            <input type="submit" value="Сохранить" class="btn btn-primary" />
-            @Html.ActionLink("Отменить изменения и вернуться к списку", "Index", null, new
-            {
-                @class = "btn btn-default"
-            })
+            <input type="submit" value="Зберегти" class="btn btn-outline-success" />
+            @Html.ActionLink("Скасувати і повернутися", "Index", null, new
+       {
+           @class = "btn btn-outline-warning"
+       })
         </div>
     }
 </div>
