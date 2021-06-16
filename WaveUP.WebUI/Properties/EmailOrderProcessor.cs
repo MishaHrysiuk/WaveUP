@@ -8,13 +8,13 @@ namespace WaveUP.Domain.Concrete
 {
     public class EmailSettings
     {
-        public string MailToAddress = "orders@example.com";
-        public string MailFromAddress = "waveup@example.com";
+        public string MailToAddress = "waveupua@gmail.com";
+        public string MailFromAddress = "0973853103h@gmail.com";
         public bool UseSsl = true;
         public string Username = "MySmtpUsername";
         public string Password = "MySmtpPassword";
         public string ServerName = "smtp.example.com";
-        public int ServerPort = 587;
+        public int ServerPort = 25;
         public bool WriteAsFile = true;
         public string FileLocation = @"D:\waveup_emails";
     }
@@ -55,12 +55,12 @@ namespace WaveUP.Domain.Concrete
                 foreach (var line in cart.Lines)
                 {
                     var subtotal = line.Instrument.Price * line.Quantity;
-                    body.AppendFormat("{0} x {1} (итого: {2:c}",
+                    body.AppendFormat("{0} x {1} (всьго: {2:c})\n",
                         line.Quantity, line.Instrument.Name, subtotal);
                 }
 
                 body.AppendFormat("Загальна вартість: {0:c}", cart.ComputeTotalValue())
-                    .AppendLine("---")
+                    .AppendLine("\n---")
                     .AppendLine("Доставка:")
                     .AppendLine(shippingInfo.FirstName)
                     .AppendLine(shippingInfo.LastName)
