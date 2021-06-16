@@ -29,7 +29,7 @@ namespace WaveUP.WebUI.Controllers
         {
             if (cart.Lines.Count() == 0)
             {
-                ModelState.AddModelError("", "Вибачте, ваша корзина порожня!");
+                ModelState.AddModelError("", "Вибачте, ваш кошик порожній!");
             }
 
             if (ModelState.IsValid)
@@ -59,6 +59,17 @@ namespace WaveUP.WebUI.Controllers
             if (instrument != null)
             {
                 cart.AddItem(instrument, 1);
+            }
+            return RedirectToAction("Index", new { returnUrl });
+        }
+        public RedirectToRouteResult MinusOneCart(Cart cart, int instrumentId, string returnUrl)
+        {
+            Instrument instrument = repository.Instruments
+                .FirstOrDefault(g => g.InstrumentId == instrumentId);
+
+            if (instrument != null)
+            {
+                cart.MinusItem(instrument, 1);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
