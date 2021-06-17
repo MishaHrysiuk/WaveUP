@@ -8,7 +8,6 @@ namespace WaveUP.Domain.Concrete
 {
     public class EmailSettings
     {
-        public string MailToAddress = "matviychukandrey1@gmail.com";
         public string MailFromAddress = "waveupua@gmail.com";
         public bool UseSsl = true;
         public string Username = "MySmtpUsername";
@@ -69,7 +68,7 @@ namespace WaveUP.Domain.Concrete
                     .AppendLine(shippingInfo.Address)
                     .AppendLine(shippingInfo.HouseNumber)
                     .AppendLine(shippingInfo.ApartmentNumber ?? "")
-                    .AppendLine(shippingInfo.PhoneNumber);
+                    .AppendLine(shippingInfo.PhoneNumber.Replace(" ", string.Empty));
 
                 MailMessage mailMessage = new MailMessage(
                                        emailSettings.MailFromAddress,	// От кого

@@ -21,6 +21,7 @@ namespace WaveUP.Domain.Entities
 
         // email
         [Required(ErrorMessage = "Вкажіть email")]
+        [EmailAddress(ErrorMessage = "Неправильний email")]
         [Display(Name = "email")]
         public string email { get; set; }
 
@@ -51,6 +52,8 @@ namespace WaveUP.Domain.Entities
         //Phone тumber 
         [Required(ErrorMessage = "Вкажіть номер телефону")]
         [Display(Name = "Номер телефону")]
+        [RegularExpression(@"^\d{3}\d{3}\d{4}$", 
+            ErrorMessage = "Номер телефона повинен мати формат xxx xxx xxxx")]
         public string PhoneNumber { get; set; }
     }
 }
