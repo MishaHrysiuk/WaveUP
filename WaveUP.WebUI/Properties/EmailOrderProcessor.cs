@@ -8,14 +8,15 @@ namespace WaveUP.Domain.Concrete
 {
     public class EmailSettings
     {
-        public string MailFromAddress = "waveupua@gmail.com";
+        public string MailAddress = "waveupua@gmail.com";
         public bool UseSsl = true;
-        public string Username = "MySmtpUsername";
-        public string Password = "MySmtpPassword";
-        public string ServerName = "smtp.example.com";
+        public string Username = "waveupua@gmail.com";
+        public string Password = "waveup2812";
+        public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
-        public bool WriteAsFile = true;
-        public string FileLocation = @"D:\waveup_emails";
+        public bool WriteAsFile = false;
+        //change here for local save
+        public string FileLocation = @"E:\mails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
@@ -29,22 +30,15 @@ namespace WaveUP.Domain.Concrete
 
         public void ProcessOrder(Cart cart, ShippingDetails shippingInfo)
         {
-            using (var smtpClient = new SmtpClient())
+            using (SmtpClient smtpClient = new SmtpClient())
             {
                 smtpClient.EnableSsl = emailSettings.UseSsl;
                 smtpClient.Host = emailSettings.ServerName;
                 smtpClient.Port = emailSettings.ServerPort;
                 smtpClient.UseDefaultCredentials = false;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.Credentials
                     = new NetworkCredential(emailSettings.Username, emailSettings.Password);
-
-                if (emailSettings.WriteAsFile)
-                {
-                    smtpClient.DeliveryMethod
-                        = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
-                    smtpClient.EnableSsl = false;
-                }
 
                 StringBuilder body = new StringBuilder()
                     .AppendLine("Новий заказ опрацьований")
@@ -68,16 +62,22 @@ namespace WaveUP.Domain.Concrete
                     .AppendLine(shippingInfo.Address)
                     .AppendLine(shippingInfo.HouseNumber)
                     .AppendLine(shippingInfo.ApartmentNumber ?? "")
+                    .AppendLine("\nEMAIL_OVER_HERE\n")
+                    .AppendLine(shippingInfo.email)
+                    .AppendLine("\nEMAIL_OVER_HERE\n")
                     .AppendLine(shippingInfo.PhoneNumber.Replace(" ", string.Empty));
 
-                MailMessage mailMessage = new MailMessage(
-                                       emailSettings.MailFromAddress,	// От кого
-                                       shippingInfo.email,		        // Кому
-                                       "Новий заказ відправлений!",		// Тема
-                                       body.ToString()); 				// Тело письма
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress(emailSettings.MailAddress);
+                mailMessage.To.Add(new MailAddress(emailSettings.MailAddress));
+                //mailMessage.Subject = "TEST";
+                mailMessage.Body = body.ToString();
 
                 if (emailSettings.WriteAsFile)
                 {
+                    smtpClient.DeliveryMethod
+                       = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+                    smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
                     mailMessage.BodyEncoding = Encoding.UTF8;
                 }
 
