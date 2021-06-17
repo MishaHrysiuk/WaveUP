@@ -237,6 +237,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Views\Shared\Logo.png" />
+    <Content Include="Views\Shared\Logoicon.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
