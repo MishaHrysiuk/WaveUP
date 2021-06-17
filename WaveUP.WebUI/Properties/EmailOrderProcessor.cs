@@ -8,15 +8,15 @@ namespace WaveUP.Domain.Concrete
 {
     public class EmailSettings
     {
-        public string MailToAddress = "orders@example.com";
-        public string MailFromAddress = "waveup@example.com";
+        public string MailToAddress = "matviychukandrey1@gmail.com";
+        public string MailFromAddress = "waveupua@gmail.com";
         public bool UseSsl = true;
         public string Username = "MySmtpUsername";
         public string Password = "MySmtpPassword";
-        public string ServerName = "smtp.example.com";
+        public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
         public bool WriteAsFile = true;
-        public string FileLocation = @"D:\waveup_emails";
+        public string FileLocation = @"E:\mails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
@@ -73,7 +73,7 @@ namespace WaveUP.Domain.Concrete
 
                 MailMessage mailMessage = new MailMessage(
                                        emailSettings.MailFromAddress,	// От кого
-                                       emailSettings.MailToAddress,		// Кому
+                                       shippingInfo.email,		        // Кому
                                        "Новий заказ відправлений!",		// Тема
                                        body.ToString()); 				// Тело письма
 

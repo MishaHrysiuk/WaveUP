@@ -18,7 +18,12 @@ namespace WaveUP.Domain.Entities
         [Required(ErrorMessage = "Вкажіть прізвище")]
         [Display(Name = "Прізвище")]
         public string LastName { get; set; }
-        
+
+        // email
+        [Required(ErrorMessage = "Вкажіть email")]
+        [Display(Name = "email")]
+        public string email { get; set; }
+
         // Region
         [Required(ErrorMessage = "Вкажіть область")]
         [Display(Name = "Область")]
