@@ -1,7 +1,7 @@
 ﻿@model WaveUP.WebUI.Models.CartIndexViewModel
 
 @{
-    ViewBag.Title = "WaveUP: ваша корзина";
+    ViewBag.Title = "WaveUP: кошик";
 }
 
 <style>
@@ -9,7 +9,7 @@
         vertical-align: middle;
     }
 </style>
-<h2>Ваша корзина</h2>
+<h2>Кошик</h2>
 <table id="cartTable" class="table">
     <thead>
         <tr>
@@ -23,32 +23,46 @@
         @foreach (var line in Model.Cart.Lines)
         {
             <tr>
-                <td class="text-center">@line.Quantity</td>
-                <td class="text-left">@line.Instrument.Name</td>
-                <td class="text-right">@line.Instrument.Price.ToString("# $")</td>
-                <td class="text-right">
-                    @((line.Quantity * line.Instrument.Price).ToString("# $"))
-                </td>
-                <td>
-                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                <td class="text-center">
+                    @using (Html.BeginForm("MinusOneCart", "Cart", null, FormMethod.Post, new { style = "width:33%; display:inline-block;" }))
                     {
                         @Html.Hidden("InstrumentId", line.Instrument.InstrumentId)
                         @Html.HiddenFor(x => x.ReturnUrl)
-                        <input class="btn btn-sm btn-danger" type="submit" value="Видалити" />
+                        <input class="btn" type="submit" value="-" />
                     }
+                    <span style="width:33%;"> @line.Quantity</span>
+                    @using (Html.BeginForm("AddToCart", "Cart", null, FormMethod.Post, new { style = "width:33%; display:inline-block;" }))
+                    {
+                        @Html.Hidden("InstrumentId", line.Instrument.InstrumentId)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="btn" type="submit" value="+" />
+                    }
+</td>
+        <td class="text-left">@line.Instrument.Name</td>
+        <td class="text-right">@line.Instrument.Price.ToString("# $")</td>
+        <td class="text-right">
+            @((line.Quantity * line.Instrument.Price).ToString("# $"))
+        </td>
+        <td>
+            @using (Html.BeginForm("RemoveFromCart", "Cart"))
+            {
+                @Html.Hidden("InstrumentId", line.Instrument.InstrumentId)
+                @Html.HiddenFor(x => x.ReturnUrl)
+                <input class="btn btn-sm btn-danger" type="submit" value="Видалити" />
+            }
+        </td>
+        </tr>
+    }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Разом:</td>
+                <td class="text-right">
+                    @Model.Cart.ComputeTotalValue().ToString("# $")
                 </td>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3" class="text-right">Разом:</td>
-            <td class="text-right">
-                @Model.Cart.ComputeTotalValue().ToString("# $")
-            </td>
-        </tr>
-    </tfoot>
-</table>
+        </tfoot>
+    </table>
 
 <div class="text-center">
     <a class="btn btn-primary" href="@Model.ReturnUrl">Продовжити покупки</a>

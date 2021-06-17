@@ -30,6 +30,28 @@ namespace WaveUP.Domain.Entities
             }
         }
 
+        public void MinusItem(Instrument instrument, int quantity)
+        {
+            CartLine line = lineCollection
+                .Where(g => g.Instrument.InstrumentId == instrument.InstrumentId)
+                .FirstOrDefault();
+
+            if (line.Quantity > 1)
+            {
+                line.Quantity -= quantity;
+               /* lineCollection.Add(new CartLine
+                {
+                    Instrument = instrument,
+                    Quantity = quantity
+                });*/
+            }
+/*            else
+            {
+                
+            }*/
+        }
+
+
         public void RemoveLine(Instrument instrument)
         {
             lineCollection.RemoveAll(l => l.Instrument.InstrumentId == instrument.InstrumentId);
