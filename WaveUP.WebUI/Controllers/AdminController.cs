@@ -62,7 +62,7 @@ namespace WaveUP.WebUI.Controllers
             Instrument deletedInstrument = repository.DeleteInstrument(instrumentId);
             if (deletedInstrument != null)
             {
-                TempData["message"] = string.Format("Игра \"{0}\" была удалена",
+                TempData["message"] = string.Format("Інструмент \"{0}\" був видален",
                     deletedInstrument.Name);
             }
             return RedirectToAction("Index");
