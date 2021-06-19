@@ -35,7 +35,6 @@ namespace WaveUP.WebUI.Infrastructure
         {
             kernel.Bind<IInstrumentRepository>().To<EFInstrumentRepository>();
 
-            //dont touch here!
             EmailSettings emailSettings = new EmailSettings
             {
                 WriteAsFile = bool.Parse(ConfigurationManager

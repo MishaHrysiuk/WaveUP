@@ -33,7 +33,7 @@ namespace WaveUP.WebUI.Controllers
             return View(instrument);
         }
 
-        // Перегруженная версия Edit() для сохранения изменений
+      
         [HttpPost]
         public ActionResult Edit(Instrument instrument, HttpPostedFileBase image = null)
         {
@@ -51,7 +51,7 @@ namespace WaveUP.WebUI.Controllers
             }
             else
             {
-                // Что-то не так со значениями данных
+               
                 return View(instrument);
             }
         }
