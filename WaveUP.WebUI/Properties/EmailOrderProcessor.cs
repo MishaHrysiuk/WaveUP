@@ -70,7 +70,7 @@ namespace WaveUP.Domain.Concrete
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.From = new MailAddress(emailSettings.MailAddress);
                 mailMessage.To.Add(new MailAddress(emailSettings.MailAddress));
-                //mailMessage.Subject = "TEST";
+                mailMessage.Subject = "Новий заказ!!!";
                 mailMessage.Body = body.ToString();
 
                 if (emailSettings.WriteAsFile)
